@@ -89,16 +89,22 @@ function createImg(arr) {
 
 function onImageClick(event) {
   event.preventDefault();
- 
+
+  
+
   if (event.target.nodeName !== 'IMG') {
     return;
   };
-  console.log(event.target.nodeName);
-//   const instance = basicLightbox.create(`
-//   <div class="modal">
-//     <img src="" alt="">
-//   </div>
-// `);
+
+  const currentLinkImage = event.target.closest('.gallery-link');
+  
+  const instance = basicLightbox.create(`
+  <div class="modal">
+    <img src="${currentLinkImage.href}" alt="">
+  </div>
+  `);
+
+  instance.show();
 }
 
 

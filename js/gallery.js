@@ -65,13 +65,16 @@ const images = [
 ];
 
 const galleryEl = document.querySelector('.gallery');
+// const escapeKey = document.addEventListener('keydown', onEscClick);
 
 galleryEl.insertAdjacentHTML('beforeend', createImg(images));
 galleryEl.addEventListener('click', onImageClick);
 
+
 function createImg(arr) {
   return arr
-    .map(img => `
+    .map(
+      img => `
       <li class="gallery-item">
         <a class="gallery-link" href="${img.original}">
           <img
@@ -90,21 +93,30 @@ function createImg(arr) {
 function onImageClick(event) {
   event.preventDefault();
 
-  
-
   if (event.target.nodeName !== 'IMG') {
     return;
-  };
+  }
 
-  const currentLinkImage = event.target.closest('.gallery-link');
-  
-  const instance = basicLightbox.create(`
-  <div class="modal">
-    <img src="${currentLinkImage.href}" alt="">
-  </div>
-  `);
+  const instance = basicLightbox.create(
+    `
+    <div class="modal">
+      <img src="${event.target.dataset.source}" alt="${event.target.alt}">
+    </div>
+  `,
+    {
+      onShow: (instance) => document.addEventListener('keydown', onEscClick),
+    }
+  );
 
   instance.show();
 }
+
+  
+
+  function onEscClick(event) {
+    if (event.code === 'Escape') {
+      instance.close();
+    }
+  }
 
 

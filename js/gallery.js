@@ -99,14 +99,18 @@ function onImageClick(event) {
   const instance = basicLightbox.create(
     `
     <div class="modal">
-      <img src="${event.target.dataset.source}" alt="${event.target.alt}">
+      <img src="${event.target.dataset.source}" alt="${event.target.alt}" width = "1112" height = "640">
     </div>
   `,
     {
-      onShow: (instance) => { document.addEventListener('keydown', onEscClick);},
+      onShow: instance => {
+        document.addEventListener('keydown', onEscClick);
+      },
     },
     {
-      onClose: (instance) => { document.removeEventListener('keydown', onEscClick);},
+      onClose: instance => {
+        document.removeEventListener('keydown', onEscClick);
+      },
     }
   );
 

@@ -65,7 +65,6 @@ const images = [
 ];
 
 const galleryEl = document.querySelector('.gallery');
-// const escapeKey = document.addEventListener('keydown', onEscClick);
 
 galleryEl.insertAdjacentHTML('beforeend', createImg(images));
 galleryEl.addEventListener('click', onImageClick);
@@ -104,19 +103,19 @@ function onImageClick(event) {
     </div>
   `,
     {
-      onShow: (instance) => document.addEventListener('keydown', onEscClick),
+      onShow: (instance) => { document.addEventListener('keydown', onEscClick);},
+    },
+    {
+      onClose: (instance) => { document.removeEventListener('keydown', onEscClick);},
     }
   );
 
   instance.show();
-}
-
-  
 
   function onEscClick(event) {
     if (event.code === 'Escape') {
       instance.close();
     }
   }
-
+};
 

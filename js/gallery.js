@@ -92,7 +92,7 @@ function createImg(arr) {
 function onImageClick(event) {
   event.preventDefault();
 
-  if (event.target.nodeName !== 'IMG') {
+  if (!event.target.classList.contains('gallery-image')) {
     return;
   }
 
